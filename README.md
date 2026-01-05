@@ -1,4 +1,4 @@
-# PSON 
+# pson 
 A tool for prettifying, aligning, and compressing JSON files
 
 ## Installation 
@@ -10,5 +10,3 @@ A tool for prettifying, aligning, and compressing JSON files
 ## TODO
 * `pretty` command 
 * `align` command 
-* `compress` command 
-* `--overwrite` flag
