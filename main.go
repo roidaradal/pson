@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const usage string = "Usage: pson <pretty|align|compress> <file.json> (--overwrite)"
+const usage string = "Usage: pson <indent|align|compress> <file.json> (--overwrite)"
 
 func main() {
 	var err error
@@ -15,6 +15,8 @@ func main() {
 	switch command {
 	case "compress":
 		err = compressJSON(inputPath, outputPath)
+	case "indent":
+		err = indentJSON(inputPath, outputPath)
 	default:
 		fmt.Println("Unknown command: ", command)
 		fmt.Println(usage)
