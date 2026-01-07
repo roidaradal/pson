@@ -6,6 +6,3 @@ A tool for indenting, aligning, and compressing JSON files
 
 ## Usage 
 `pson <indent|align|compress> <file.json> (--overwrite)`
-
-## TODO
-* Recursive `align`
