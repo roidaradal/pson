@@ -3,11 +3,15 @@ package main
 import (
 	"fmt"
 	"os"
-	"slices"
 	"strings"
+
+	"github.com/roidaradal/fn/number"
+	"github.com/roidaradal/fn/str"
 )
 
-const usage string = "Usage: pson <indent|align|compress> <file.json> (--overwrite)"
+const usage string = "Usage: pson <indent|align|compress> <file.json> (--overwrite) (--indent=2)"
+
+var indentSpace int = 2
 
 func main() {
 	var err error
@@ -40,11 +44,22 @@ func getArgs() (command, inputPath, outputPath string) {
 		fmt.Println("File path needs to be a .json file")
 		os.Exit(1)
 	}
-	if slices.Contains(args, "--overwrite") {
-		outputPath = inputPath
-	} else {
-		filename, _ := strings.CutSuffix(inputPath, ".json")
-		outputPath = fmt.Sprintf("%s.%s.json", filename, command)
+
+	// Default output path
+	filename, _ := strings.CutSuffix(inputPath, ".json")
+	outputPath = fmt.Sprintf("%s.%s.json", filename, command)
+
+	for _, arg := range args[2:] {
+		if arg == "--overwrite" {
+			outputPath = inputPath
+		} else if strings.HasPrefix(arg, "--indent=") {
+			parts := strings.Split(arg, "=")
+			if len(parts) == 2 {
+				customIndent := number.ParseInt(parts[1])
+				indentSpace = max(indentSpace, customIndent)
+				str.SetJSONIndentLength(indentSpace)
+			}
+		}
 	}
 	return command, inputPath, outputPath
 }

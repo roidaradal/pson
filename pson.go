@@ -124,7 +124,7 @@ func transferJSON(inputPath, outputPath string, indent bool) error {
 // Align map data
 func alignMap(data map[string]any, level int) string {
 	out := make([]string, 0)
-	indent := strings.Repeat("  ", level)
+	indent := strings.Repeat(" ", indentSpace*level)
 	keys := dict.Keys(data)
 	slices.Sort(keys)
 	maxLength := slices.Max(list.Map(keys, str.Length)) + 2
@@ -160,7 +160,7 @@ func alignMap(data map[string]any, level int) string {
 // Align list data
 func alignList(data []any, level int) string {
 	out := make([]string, 0)
-	indent := strings.Repeat("  ", level)
+	indent := strings.Repeat(" ", indentSpace*level)
 	for _, item := range data {
 		if isList(item) {
 			dataList, ok := item.([]any)
