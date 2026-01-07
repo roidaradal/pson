@@ -8,4 +8,4 @@ A tool for indenting, aligning, and compressing JSON files
 `pson <indent|align|compress> <file.json> (--overwrite)`
 
 ## TODO
-* `align` command 
+* Recursive `align`

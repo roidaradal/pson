@@ -17,6 +17,8 @@ func main() {
 		err = compressJSON(inputPath, outputPath)
 	case "indent":
 		err = indentJSON(inputPath, outputPath)
+	case "align":
+		err = alignJSON(inputPath, outputPath)
 	default:
 		fmt.Println("Unknown command: ", command)
 		fmt.Println(usage)
