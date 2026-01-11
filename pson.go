@@ -135,7 +135,8 @@ func alignMap(data map[string]any, level int) string {
 			dataList, ok := value.([]any)
 			if ok {
 				body := alignList(dataList, level+1)
-				valueString := fmt.Sprintf("[\n%s%s]", body, indent)
+				body = bodyList(body, indent)
+				valueString := fmt.Sprintf("[%s]", body)
 				line := indent + fmt.Sprintf(template, key, valueString)
 				out = append(out, line)
 				continue
@@ -166,7 +167,8 @@ func alignList(data []any, level int) string {
 			dataList, ok := item.([]any)
 			if ok {
 				body := alignList(dataList, level+1)
-				line := indent + "[\n" + body + indent + "]"
+				body = bodyList(body, indent)
+				line := indent + "[" + body + "]"
 				out = append(out, line)
 				continue
 			}
@@ -184,6 +186,16 @@ func alignList(data []any, level int) string {
 		out = append(out, line)
 	}
 	return strings.Join(out, ",\n") + "\n"
+}
+
+// Body list
+func bodyList(body, indent string) string {
+	if flatList {
+		body = strings.ReplaceAll(body, "\n", " ")
+		return strings.Join(strings.Fields(body), " ")
+	} else {
+		return "\n" + body + indent
+	}
 }
 
 // Convert item of any type to string

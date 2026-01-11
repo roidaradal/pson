@@ -9,9 +9,12 @@ import (
 	"github.com/roidaradal/fn/str"
 )
 
-const usage string = "Usage: pson <indent|align|compress> <file.json> (--overwrite) (--indent=2)"
+const usage string = "Usage: pson <indent|align|compress> <file.json> (--overwrite) (--indent=2) (--flatlist)"
 
-var indentSpace int = 2
+var (
+	indentSpace int  = 2
+	flatList    bool = false
+)
 
 func main() {
 	var err error
@@ -52,6 +55,8 @@ func getArgs() (command, inputPath, outputPath string) {
 	for _, arg := range args[2:] {
 		if arg == "--overwrite" {
 			outputPath = inputPath
+		} else if arg == "--flatlist" {
+			flatList = true
 		} else if strings.HasPrefix(arg, "--indent=") {
 			parts := strings.Split(arg, "=")
 			if len(parts) == 2 {
