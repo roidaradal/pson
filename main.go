@@ -9,7 +9,7 @@ import (
 	"github.com/roidaradal/fn/str"
 )
 
-const usage string = "Usage: pson <indent|align|compress> <file.json> (--overwrite) (--indent=2) (--flatlist)"
+const usage string = "Usage: pson <align|compress|indent> <file.json> (--output=path) (--overwrite) (--indent=2) (--flatlist)"
 
 var (
 	indentSpace int  = 2
@@ -42,6 +42,7 @@ func getArgs() (command, inputPath, outputPath string) {
 		fmt.Println(usage)
 		os.Exit(1)
 	}
+
 	command, inputPath = args[0], args[1]
 	if !strings.HasSuffix(inputPath, ".json") {
 		fmt.Println("File path needs to be a .json file")
@@ -63,6 +64,11 @@ func getArgs() (command, inputPath, outputPath string) {
 				customIndent := number.ParseInt(parts[1])
 				indentSpace = max(indentSpace, customIndent)
 				str.SetJSONIndentLength(indentSpace)
+			}
+		} else if strings.HasPrefix(arg, "--output=") {
+			parts := strings.Split(arg, "=")
+			if len(parts) == 2 {
+				outputPath = parts[1]
 			}
 		}
 	}
