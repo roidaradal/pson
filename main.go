@@ -7,25 +7,21 @@ import (
 
 	"github.com/roidaradal/fn/number"
 	"github.com/roidaradal/fn/str"
+	"github.com/roidaradal/pson/internal/pson"
 )
 
-const usage string = "Usage: pson <align|compress|indent> <file.json> (--output=path) (--overwrite) (--indent=2) (--flatlist)"
-
-var (
-	indentSpace int  = 2
-	flatList    bool = false
-)
+const usage string = "Usage: pson <align|compress|indent> <file.json> (output=path) (overwrite) (indent=2) (flatlist)"
 
 func main() {
 	var err error
 	command, inputPath, outputPath := getArgs()
 	switch command {
 	case "compress":
-		err = compressJSON(inputPath, outputPath)
+		err = pson.CompressJSON(inputPath, outputPath)
 	case "indent":
-		err = indentJSON(inputPath, outputPath)
+		err = pson.IndentJSON(inputPath, outputPath)
 	case "align":
-		err = alignJSON(inputPath, outputPath)
+		err = pson.AlignJSON(inputPath, outputPath)
 	default:
 		fmt.Println("Unknown command: ", command)
 		fmt.Println(usage)
@@ -54,22 +50,23 @@ func getArgs() (command, inputPath, outputPath string) {
 	outputPath = fmt.Sprintf("%s.%s.json", filename, command)
 
 	for _, arg := range args[2:] {
-		if arg == "--overwrite" {
+		if arg == "overwrite" {
 			outputPath = inputPath
-		} else if arg == "--flatlist" {
-			flatList = true
-		} else if strings.HasPrefix(arg, "--indent=") {
-			parts := strings.Split(arg, "=")
-			if len(parts) == 2 {
-				customIndent := number.ParseInt(parts[1])
-				indentSpace = max(indentSpace, customIndent)
-				str.SetJSONIndentLength(indentSpace)
+		} else if arg == "flatlist" {
+			pson.FLAT_LIST = true
+		} else if strings.HasPrefix(arg, "indent=") {
+			customIndent, ok := str.TryGetPart(arg, "=", 1)
+			if !ok {
+				continue
 			}
-		} else if strings.HasPrefix(arg, "--output=") {
-			parts := strings.Split(arg, "=")
-			if len(parts) == 2 {
-				outputPath = parts[1]
+			pson.INDENT_SPACE = max(pson.INDENT_SPACE, number.ParseInt(customIndent))
+			str.SetJSONIndentLength(pson.INDENT_SPACE)
+		} else if strings.HasPrefix(arg, "output=") {
+			path, ok := str.TryGetPart(arg, "=", 1)
+			if !ok {
+				continue
 			}
+			outputPath = path
 		}
 	}
 	return command, inputPath, outputPath
