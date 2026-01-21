@@ -10,6 +10,7 @@ import (
 	"github.com/roidaradal/pson/internal/pson"
 )
 
+const currentVersion string = "v0.1.3"
 const usage string = "Usage: pson <align|compress|indent|validate> <file.json> (output=path) (overwrite) (indent=2) (flatlist)"
 
 func main() {
@@ -24,6 +25,8 @@ func main() {
 		err = pson.AlignJSON(inputPath, outputPath)
 	case "validate":
 		err = pson.ValidateJSON(inputPath)
+	case "version":
+		fmt.Println("pson", currentVersion)
 	default:
 		fmt.Println("Unknown command: ", command)
 		fmt.Println(usage)
