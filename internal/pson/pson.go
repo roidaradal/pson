@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/roidaradal/fn/io"
+	"github.com/roidaradal/nlp"
 )
 
 var (
@@ -62,6 +63,23 @@ func AlignJSON(inputPath, outputPath string) error {
 
 	fmt.Println("Saved:", outputPath)
 	return nil
+}
+
+// Validate JSON from inputPath
+func ValidateJSON(inputPath string) error {
+	lexer, err := nlp.NewJSONLexer()
+	if err != nil {
+		return err
+	}
+	lines, err := nlp.ReadLineBytes(inputPath)
+	if err != nil {
+		return err
+	}
+	_, err = lexer.Tokenize(lines, nil)
+	if err == nil {
+		fmt.Println("Valid JSON")
+	}
+	return err
 }
 
 // Common: Read JSON from inputPath

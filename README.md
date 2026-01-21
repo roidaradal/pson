@@ -4,15 +4,20 @@ A tool for indenting, aligning, and compressing JSON files, written in Go
 ## Installation 
 `go install github.com/roidaradal/pson@latest` 
 
-## Usage 
-`pson <align|compress|indent> <file.json> (output=path) (overwrite) (indent=2) (flatlist)`
+OR 
 
-## Commands
+Download `pson.exe` from the [releases](https://github.com/roidaradal/pson/releases) page. Add the folder where you saved `pson.exe` to your system PATH.
+
+## Usage 
+`pson <align|compress|indent|validate> <file.json> (output=path) (overwrite) (indent=2) (flatlist)`
+
+### Commands
 * `align` - Saves the JSON with object keys aligned
 * `compress` - Saves compressed JSON (no whitespace)
 * `indent` - Saves indented JSON 
+* `validate` - Validate JSON
 
-## Options 
+### Options 
 * `output=path` - Set custom output file path 
 * `overwrite` - Makes the output file path same as input file (overwrite)
 * `indent=X` - Sets the number of spaces as indent level for the `indent` command
@@ -25,3 +30,4 @@ Note: If both `output=path` and `overwrite` are used, the last option will be fo
 * Schema validation: given an object schema, check if JSON follows it 
 * Generate Go struct / TypeScript object from JSON 
 * Diff with another JSON (analyze both contents to compare)
+* Convert to another format (CSV, TOML, ENV, etc)
