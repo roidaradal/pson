@@ -67,7 +67,7 @@ func AlignJSON(inputPath, outputPath string) error {
 
 // Validate JSON from inputPath
 func ValidateJSON(inputPath string) error {
-	lexer, err := nlp.NewJSONLexer()
+	parser, err := nlp.NewJSONParser()
 	if err != nil {
 		return err
 	}
@@ -75,7 +75,10 @@ func ValidateJSON(inputPath string) error {
 	if err != nil {
 		return err
 	}
-	_, err = lexer.Tokenize(lines, nil)
+	// for _, line := range lines[:10] {
+	// 	fmt.Println(line, string(line))
+	// }
+	err = parser.Parse(lines, nil)
 	if err == nil {
 		fmt.Println("Valid JSON")
 	}
