@@ -3,7 +3,7 @@ module github.com/roidaradal/pson
 go 1.25.0
 
 require (
-	github.com/roidaradal/fn v0.5.50
+	github.com/roidaradal/fn v0.5.52
 	github.com/roidaradal/nlp v0.1.5
 )
 
