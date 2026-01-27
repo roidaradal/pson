@@ -75,14 +75,31 @@ func ValidateJSON(inputPath string) error {
 	if err != nil {
 		return err
 	}
-	// for _, line := range lines[:10] {
-	// 	fmt.Println(line, string(line))
-	// }
 	err = parser.Parse(lines, nil)
 	if err == nil {
 		fmt.Println("Valid JSON")
 	}
 	return err
+}
+
+// Compare two JSON files line by line
+func RawDiffJSON(path1, path2 string) error {
+	for _, path := range []string{path1, path2} {
+		if !io.PathExists(path) {
+			return fmt.Errorf("path %q does not exist", path)
+		}
+	}
+
+	lines1, err := io.ReadRawLines(path1)
+	if err != nil {
+		return err
+	}
+	lines2, err := io.ReadRawLines(path2)
+	if err != nil {
+		return err
+	}
+
+	return rawDiff(lines1, lines2)
 }
 
 // Common: Read JSON from inputPath
