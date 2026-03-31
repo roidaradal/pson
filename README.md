@@ -2,11 +2,11 @@
 A tool for indenting, aligning, and compressing JSON files, written in Go
 
 ## Installation 
-`go install github.com/roidaradal/pson@latest` 
+`go install github.com/zeroibot/pson@latest` 
 
 OR 
 
-Download `pson.exe` from the [releases](https://github.com/roidaradal/pson/releases) page. Add the folder where you saved `pson.exe` to your system PATH.
+Download `pson.exe` from the [releases](https://github.com/zeroibot/pson/releases) page. Add the folder where you saved `pson.exe` to your system PATH.
 
 ## Usage 
 `pson <align|compress|indent|validate|rawdiff|version|update> <file.json> (output=path) (with=path) (overwrite) (indent=2) (flatlist)`
@@ -18,7 +18,7 @@ Download `pson.exe` from the [releases](https://github.com/roidaradal/pson/relea
 * `validate` - Validate JSON
 * `rawdiff` - Compares two JSON files per line
 * `version` - Output current version
-* `update` - Update pson to latest version
+* `update` - Update pson to the latest version
 
 ### Options 
 * `output=path` - Set custom output file path 
@@ -31,7 +31,7 @@ Note: If both `output=path` and `overwrite` are used, the last option will be fo
 
 ## TODO
 * Rawdiff - compare line per line
-    - Advanced: find best alignment of lines (detect insertions / deletions)
+    - Advanced: find the best alignment of lines (detect insertions / deletions)
 * Diff with another JSON (analyze both contents to compare)
 * Validation: duplicate keys, inconsistent key types, etc
 * Schema validation: given an object schema, check if JSON follows it 

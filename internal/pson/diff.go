@@ -3,8 +3,8 @@ package pson
 import (
 	"fmt"
 
-	"github.com/roidaradal/fn/lang"
-	"github.com/roidaradal/fn/str"
+	"github.com/zeroibot/fn/lang"
+	"github.com/zeroibot/fn/str"
 )
 
 // Compare each line and find differences

@@ -6,10 +6,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/roidaradal/fn/dict"
-	"github.com/roidaradal/fn/dyn"
-	"github.com/roidaradal/fn/list"
-	"github.com/roidaradal/fn/str"
+	"github.com/zeroibot/fn/dict"
+	"github.com/zeroibot/fn/dyn"
+	"github.com/zeroibot/fn/list"
+	"github.com/zeroibot/fn/str"
 )
 
 // Align map data

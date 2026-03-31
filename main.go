@@ -5,10 +5,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/roidaradal/fn/io"
-	"github.com/roidaradal/fn/number"
-	"github.com/roidaradal/fn/str"
-	"github.com/roidaradal/pson/internal/pson"
+	"github.com/zeroibot/fn/io"
+	"github.com/zeroibot/fn/number"
+	"github.com/zeroibot/fn/str"
+	"github.com/zeroibot/pson/internal/pson"
 )
 
 const currentVersion string = "v0.1.4"
@@ -36,7 +36,7 @@ func main() {
 	case "version":
 		fmt.Println(str.Green(fmt.Sprintf("pson %s", currentVersion)))
 	case "update":
-		path := "github.com/roidaradal/pson@latest"
+		path := "github.com/zeroibot/pson@latest"
 		err = io.RunGoInstall(path)
 	default:
 		fmt.Println("Unknown command: ", command)

@@ -1,10 +1,10 @@
-module github.com/roidaradal/pson
+module github.com/zeroibot/pson
 
-go 1.25.0
+go 1.26.0
 
 require (
-	github.com/roidaradal/fn v0.5.52
-	github.com/roidaradal/nlp v0.1.5
+	github.com/zeroibot/fn v0.6.0
+	github.com/zeroibot/syntax v0.2.1
 )
 
-require golang.org/x/text v0.31.0 // indirect
+require golang.org/x/text v0.35.0 // indirect

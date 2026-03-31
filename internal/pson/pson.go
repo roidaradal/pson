@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
 	"strings"
 
-	"github.com/roidaradal/fn/io"
-	"github.com/roidaradal/nlp"
+	"github.com/zeroibot/fn/io"
 )
 
 var (
@@ -67,15 +67,15 @@ func AlignJSON(inputPath, outputPath string) error {
 
 // Validate JSON from inputPath
 func ValidateJSON(inputPath string) error {
-	parser, err := nlp.NewJSONParser()
+	parser, err := newJSONParser()
 	if err != nil {
 		return err
 	}
-	lines, err := nlp.ReadLineBytes(inputPath)
+	bytes, err := os.ReadFile(inputPath)
 	if err != nil {
 		return err
 	}
-	err = parser.Parse(lines, nil)
+	err = parser.CheckSyntax(string(bytes), []string{"LIT_WS"})
 	if err == nil {
 		fmt.Println("Valid JSON")
 	}
